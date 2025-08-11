@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Treasure Hunt for My Love</title>
+    <style>
+        /* --- FONTS & BASIC STYLES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400&display=swap');
+
+        :root {
+            --primary-color: #f0e6d2; /* A warm, parchment-like off-white */
+            --accent-color: #c5b358;  /* A mysterious gold */
+            --background-color: #1a1a1a;
+            --dark-overlay: rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--background-color);
+            color: var(--primary-color);
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Cg fill-rule="evenodd"%3E%3Cg fill="%23c5b358" fill-opacity="0.05"%3E%3Cpath opacity=".5" d="M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z"/%3E%3Cpath d="M6 5V0h1v5h5v1H6v5H5V6H0V5h5z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* --- STAGE CONTAINER --- */
+        .stage {
+            background: var(--dark-overlay);
+            border: 1px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(197, 179, 88, 0.2);
+        }
+
+        /* Initially hide all stages except the first one */
+        .stage:not(:first-child) {
+            display: none;
+        }
+
+        /* --- CONTENT STYLING --- */
+        .stage h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .stage p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .stage img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(197, 179, 88, 0.3);
+        }
+
+        /* --- INTERACTIVE ELEMENTS --- */
+        .input-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .answer-input {
+            width: 90%;
+            padding: 12px 15px;
+            border-radius: 5px;
+            border: 1px solid var(--accent-color);
+            background-color: #2b2b2b;
+            color: var(--primary-color);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(197, 179, 88, 0.5);
+            transform: scale(1.02);
+        }
+
+        .submit-btn {
+            padding: 12px 30px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--background-color);
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(240, 230, 210, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .error-message {
+            color: #ff8a80; /* A soft red */
+            min-height: 20px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            font-weight: 400;
+            transition: opacity 0.3s ease;
+        }
+
+        /* --- ANIMATIONS --- */
+        .fade-in {
+            animation: fadeInAnimation 1s ease-in-out;
+        }
+
+        @keyframes fadeInAnimation {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .shake {
+            animation: shakeAnimation 0.5s ease-in-out;
+        }
+
+        @keyframes shakeAnimation {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-10px); }
+            80% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 600px) {
+            .stage h1 {
+                font-size: 1.8rem;
+            }
+            .stage p {
+                font-size: 1rem;
+            }
+            .stage {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- STAGE 1 -->
+    <div class="stage" id="stage-1">
+        <h1>L'inizio</h1>
+        
+        <!-- EDIT THIS: Your first clue/riddle -->
+        <p>Può essere acuto, retto o anche ottuso, ma in questo caso appartiene... a uno zio. Vai lì, e dimmi: cosa c'è lì davanti, a terra nel punto orientato a nord?</p>
+        
+        <!-- EDIT THIS: The image for the first clue. Use a direct link from a site like Imgur. -->
+        <img src="https://raw.githubusercontent.com/MikCil/caccia-al-tesoro/refs/heads/main/nadia-carina.jpg" alt="Nadia la detective carina" width="400">
+        
+        <div class="input-group">
+            <input type="text" id="answer-1" class="answer-input" placeholder="La tua risposta...">
+            <div class="error-message" id="error-1"></div>
+            <button class="submit-btn" onclick="checkAnswer(1)">Rivela il mistero</button>
+        </div>
+    </div>
+
+    <!-- STAGE 2 -->
+    <div class="stage" id="stage-2">
+        <h1>L'avventura continua</h1>
+        
+        <!-- EDIT THIS: Your second clue/riddle -->
+        <p>Brava! Hai trovato il luogo dove abbiamo mangiato delle cozze buonissime, esattamente un anno fa. Pronta a tornarci stasera? 
+Ma ora, il prossimo indizio: una spiaggia chiamata come un mio amico... a volte un po' fastidioso.
+Corri verso Levante e scopri il suo colore!</p>
+        
+        <!-- EDIT THIS: The image for the second clue. -->
+        <img src="https://a.travel-assets.com/findyours-php/viewfinder/images/res70/295000/295753-Italy.jpg" alt="Pesaro!" width="400">
+        
+        <div class="input-group">
+            <input type="text" id="answer-2" class="answer-input" placeholder="La tua risposta...">
+            <div class="error-message" id="error-2"></div>
+            <button class="submit-btn" onclick="checkAnswer(2)">Rivela il mistero</button>
+        </div>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div class="stage" id="stage-3">
+        <h1>Un nuovo enigma</h1>
+        
+        <!-- EDIT THIS: Your third clue/riddle -->
+        <p>Complimenti! Le inconfondibili cabine rosa di bagni Gabri non sono state un problema per te. Adesso, attenzione: pensa all'unica architettura che può... metterti fame. Noterai degli animali particolari lì intorno, oserei dire mitologici. Di che specie di animale si tratta?</p>
+        
+        <!-- EDIT THIS: The image for the third clue. -->
+        <img src="https://angolodimario.it/wp-content/uploads/2022/07/Homepage_Ristorante.webp" alt="Gnam gnam..." width="400">
+        
+        <div class="input-group">
+            <input type="text" id="answer-3" class="answer-input" placeholder="La tua risposta...">
+            <div class="error-message" id="error-3"></div>
+            <button class="submit-btn" onclick="checkAnswer(3)">Rivela il mistero</button>
+        </div>
+    </div>
+
+    <!-- STAGE 4 - The Final Reveal -->
+    <div class="stage" id="stage-4">
+        <h1>La sifda finale!</h1>
+        
+        <!-- EDIT THIS: Your final message. This leads to the physical treasure! -->
+        <p>Ce l'hai fatta! Ecco il tuo indizio finale: corri alla meta!
+
+@risposta1_risposta2_risposta3</p>
+        
+        <!-- EDIT THIS: The final image. -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Sfera_grande_Palla_di_Pomodoro.jpg/2560px-Sfera_grande_Palla_di_Pomodoro.jpg" alt="Corri corri!" width="400">
+    </div>
+
+
+    <script>
+        // --- JAVASCRIPT LOGIC --- //
+
+        // =================================================================
+        // EDIT THIS SECTION: Put your answers here. They are not case-sensitive.
+        // For example, if the answer is "Paris", she can type "paris", "Paris", or "PARIS".
+        // =================================================================
+        const answers = {
+            stage1: "tramontana",
+            stage2: "rosa",
+            stage3: "grifone"
+        };
+        // =================================================================
+        // END OF EDITABLE SECTION
+        // =================================================================
+
+        function checkAnswer(stageNum) {
+            const currentStageId = `stage-${stageNum}`;
+            const nextStageId = `stage-${stageNum + 1}`;
+            
+            const currentStage = document.getElementById(currentStageId);
+            const nextStage = document.getElementById(nextStageId);
+            
+            const inputElement = document.getElementById(`answer-${stageNum}`);
+            const errorElement = document.getElementById(`error-${stageNum}`);
+            const userAnswer = inputElement.value.trim().toLowerCase();
+            
+            const correctAnswer = answers[`stage${stageNum}`].toLowerCase();
+
+            // Clear previous error and animations
+            errorElement.textContent = '';
+            currentStage.classList.remove('shake');
+
+            if (userAnswer === correctAnswer) {
+                // Correct answer! Transition to the next stage.
+                console.log('Correct!');
+                currentStage.style.display = 'none';
+                if (nextStage) {
+                    nextStage.style.display = 'flex';
+                    nextStage.classList.add('fade-in');
+                }
+            } else {
+                // Wrong answer. Show error and shake animation.
+                console.log('Incorrect!');
+                errorElement.textContent = 'Quasi, ma non proprio... Riprova!';
+                currentStage.classList.add('shake');
+
+                // Remove the shake class after the animation finishes so it can be re-triggered
+                setTimeout(() => {
+                    currentStage.classList.remove('shake');
+                }, 500);
+            }
+        }
+    </script>
+
+</body>
+</html>
